@@ -313,7 +313,7 @@ function acal.displayCalendar(year_offset)
           
           --check for sernade
           local sstring = ''
-  				if aCal.checkSeranade(serenades, year, month, day) then
+  				if acal.checkSeranade(serenades, year, month, day) then
   					setFgColor(0,0,0)
   					setBgColor(200,200,200)
             sstring = '\nOrphean Serenade'
