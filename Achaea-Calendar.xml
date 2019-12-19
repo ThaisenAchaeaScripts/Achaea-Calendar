@@ -102,7 +102,8 @@ disableTrigger('acal_reminder_open')</script>
 			</TriggerGroup>
 			<TriggerGroup isActive="no" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="yes" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
 				<name>acal_upcoming_open</name>
-				<script></script>
+				<script>acal.upcoming = {}
+deleteLine()</script>
 				<triggerType>0</triggerType>
 				<conditonLineDelta>0</conditonLineDelta>
 				<mStayOpen>999</mStayOpen>
@@ -320,7 +321,7 @@ function acal.displayCalendar(year_offset)
   				end --if
           
           --check for upcoming
-          local ustring = acal.returnEvents(year, month, day)
+          local ustring = acal.returnUpcoming(year, month, day)
           if ustring ~= '' then
             setFgColor(0,0,0)
             setBgColor(255,0,0)
@@ -475,16 +476,16 @@ function acal.addUpcomingEvent(id,event,days,hours,minutes)
   if minutes == '' then minutes = 0 else minutes = tonumber(minutes) end
   local t = (days * 24) + hours
   if minutes &gt; 30 then t = t + 1 end
-  acal.events[id] = {event:trim(),t}
+  acal.upcoming[id] = {event:trim(),t}
 end
 
 --return events for specific day
-function acal.returnEvents(y, m, d)
+function acal.returnUpcoming(y, m, d)
   local d1 = (acal.time.year - 1) * 300 + (acal.time.mon - 1) * 25 + acal.time.day
   local d2 = (y - 1) * 300 + (m - 1) * 25 + d
   local d = d2 - d1
   local s = ''
-  for _, e in pairs(acal.events) do
+  for _, e in pairs(acal.upcoming) do
     if e[2] == d then
       s = s..'\n(U) '..e[1]
     end
