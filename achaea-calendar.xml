@@ -190,7 +190,7 @@ disableTrigger('acal_upcoming_open')</script>
 	<TimerPackage />
 	<AliasPackage>
 		<AliasGroup isActive="yes" isFolder="yes">
-			<name>Achaea Calendendar</name>
+			<name>Achaea Calendar</name>
 			<script></script>
 			<command></command>
 			<packageName></packageName>
