@@ -523,7 +523,8 @@ end --function</script>
 			<Script isActive="yes" isFolder="no">
 				<name>acal_time_capture</name>
 				<packageName></packageName>
-				<script>--sets time as it recieves it via gmcp
+				<script>
+--sets time as it recieves it via gmcp
 function acal.setTime()
   acal.time = gmcp.IRE.Time.List
 end
@@ -540,6 +541,13 @@ function acal.updateTime()
 	end
 end
 
+--adds support for gmcp time
+function acal.registerTime()
+  gmod.enableModule("achaea-calendar", "IRE.Time")
+end
+
+acal.registerTime()
+registerAnonymousEventHandler("sysConnectionEvent","acal.registerTime")
 registerAnonymousEventHandler("gmcp.IRE.Time", "acal.setTime")
 registerAnonymousEventHandler("gmcp.IRE.Time.Update", "acal.updateTime")</script>
 				<eventHandlerList />
