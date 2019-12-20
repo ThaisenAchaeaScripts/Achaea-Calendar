@@ -38,11 +38,12 @@
 			</colorTriggerBgColor>
 			<regexCodeList />
 			<regexCodePropertyList />
-			<TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+			<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
 				<name>
-					Achaea Calendar
+					acal_login
 				</name>
 				<script>
+					acal.registerTime()
 				</script>
 				<triggerType>
 					0
@@ -71,14 +72,69 @@
 				<colorTriggerBgColor>
 					#000000
 				</colorTriggerBgColor>
-				<regexCodeList />
-				<regexCodePropertyList />
-				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+				<regexCodeList>
+					<string>
+						Password correct. Welcome to Achaea.
+					</string>
+				</regexCodeList>
+				<regexCodePropertyList>
+					<integer>
+						3
+					</integer>
+				</regexCodePropertyList>
+			</Trigger>
+			<TriggerGroup isActive="no" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+				<name>
+					acal_reminder_open
+				</name>
+				<script>
+					acal.reminders = {}
+					deleteLine()
+				</script>
+				<triggerType>
+					0
+				</triggerType>
+				<conditonLineDelta>
+					0
+				</conditonLineDelta>
+				<mStayOpen>
+					999
+				</mStayOpen>
+				<mCommand>
+				</mCommand>
+				<packageName>
+				</packageName>
+				<mFgColor>
+					#ff0000
+				</mFgColor>
+				<mBgColor>
+					#ffff00
+				</mBgColor>
+				<mSoundFile>
+				</mSoundFile>
+				<colorTriggerFgColor>
+					#000000
+				</colorTriggerFgColor>
+				<colorTriggerBgColor>
+					#000000
+				</colorTriggerBgColor>
+				<regexCodeList>
+					<string>
+						^ID\s*Repeat\s*Date\s*Reminder\s*
+					</string>
+				</regexCodeList>
+				<regexCodePropertyList>
+					<integer>
+						1
+					</integer>
+				</regexCodePropertyList>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="yes" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
 					<name>
-						acal_login
+						acal_reminder_capture
 					</name>
 					<script>
-						acal.registerTime()
+						--id, reminder, year, month, day
+						acal.addReminder(matches[2],matches[6],matches[5],matches[4],matches[3])
 					</script>
 					<triggerType>
 						0
@@ -109,53 +165,7 @@
 					</colorTriggerBgColor>
 					<regexCodeList>
 						<string>
-							Password correct. Welcome to Achaea.
-						</string>
-					</regexCodeList>
-					<regexCodePropertyList>
-						<integer>
-							3
-						</integer>
-					</regexCodePropertyList>
-				</Trigger>
-				<TriggerGroup isActive="no" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
-					<name>
-						acal_reminder_open
-					</name>
-					<script>
-						acal.reminders = {}
-						deleteLine()
-					</script>
-					<triggerType>
-						0
-					</triggerType>
-					<conditonLineDelta>
-						0
-					</conditonLineDelta>
-					<mStayOpen>
-						999
-					</mStayOpen>
-					<mCommand>
-					</mCommand>
-					<packageName>
-					</packageName>
-					<mFgColor>
-						#ff0000
-					</mFgColor>
-					<mBgColor>
-						#ffff00
-					</mBgColor>
-					<mSoundFile>
-					</mSoundFile>
-					<colorTriggerFgColor>
-						#000000
-					</colorTriggerFgColor>
-					<colorTriggerBgColor>
-						#000000
-					</colorTriggerBgColor>
-					<regexCodeList>
-						<string>
-							^ID\s*Repeat\s*Date\s*Reminder\s*
+							^(\d+)\s+\w+\s+(\d+)\w+\s(\w+)\s(\d+)\s+(.+)$
 						</string>
 					</regexCodeList>
 					<regexCodePropertyList>
@@ -163,150 +173,12 @@
 							1
 						</integer>
 					</regexCodePropertyList>
-					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="yes" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
-						<name>
-							acal_reminder_capture
-						</name>
-						<script>
-							--id, reminder, year, month, day
-							acal.addReminder(matches[2],matches[6],matches[5],matches[4],matches[3])
-						</script>
-						<triggerType>
-							0
-						</triggerType>
-						<conditonLineDelta>
-							0
-						</conditonLineDelta>
-						<mStayOpen>
-							0
-						</mStayOpen>
-						<mCommand>
-						</mCommand>
-						<packageName>
-						</packageName>
-						<mFgColor>
-							#ff0000
-						</mFgColor>
-						<mBgColor>
-							#ffff00
-						</mBgColor>
-						<mSoundFile>
-						</mSoundFile>
-						<colorTriggerFgColor>
-							#000000
-						</colorTriggerFgColor>
-						<colorTriggerBgColor>
-							#000000
-						</colorTriggerBgColor>
-						<regexCodeList>
-							<string>
-								^(\d+)\s+\w+\s+(\d+)\w+\s(\w+)\s(\d+)\s+(.+)$
-							</string>
-						</regexCodeList>
-						<regexCodePropertyList>
-							<integer>
-								1
-							</integer>
-						</regexCodePropertyList>
-					</Trigger>
-					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
-						<name>
-							acal_reminder_gag
-						</name>
-						<script>
-							deleteLine()
-						</script>
-						<triggerType>
-							0
-						</triggerType>
-						<conditonLineDelta>
-							0
-						</conditonLineDelta>
-						<mStayOpen>
-							0
-						</mStayOpen>
-						<mCommand>
-						</mCommand>
-						<packageName>
-						</packageName>
-						<mFgColor>
-							#ff0000
-						</mFgColor>
-						<mBgColor>
-							#ffff00
-						</mBgColor>
-						<mSoundFile>
-						</mSoundFile>
-						<colorTriggerFgColor>
-							#000000
-						</colorTriggerFgColor>
-						<colorTriggerBgColor>
-							#000000
-						</colorTriggerBgColor>
-						<regexCodeList>
-							<string>
-								return not isPrompt()
-							</string>
-						</regexCodeList>
-						<regexCodePropertyList>
-							<integer>
-								4
-							</integer>
-						</regexCodePropertyList>
-					</Trigger>
-					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
-						<name>
-							acal_reminder_close
-						</name>
-						<script>
-							setTriggerStayOpen('acal_reminder_open',0)
-							disableTrigger('acal_reminder_open')
-						</script>
-						<triggerType>
-							0
-						</triggerType>
-						<conditonLineDelta>
-							0
-						</conditonLineDelta>
-						<mStayOpen>
-							0
-						</mStayOpen>
-						<mCommand>
-						</mCommand>
-						<packageName>
-						</packageName>
-						<mFgColor>
-							#ff0000
-						</mFgColor>
-						<mBgColor>
-							#ffff00
-						</mBgColor>
-						<mSoundFile>
-						</mSoundFile>
-						<colorTriggerFgColor>
-							#000000
-						</colorTriggerFgColor>
-						<colorTriggerBgColor>
-							#000000
-						</colorTriggerBgColor>
-						<regexCodeList>
-							<string>
-								return isPrompt()
-							</string>
-						</regexCodeList>
-						<regexCodePropertyList>
-							<integer>
-								4
-							</integer>
-						</regexCodePropertyList>
-					</Trigger>
-				</TriggerGroup>
-				<TriggerGroup isActive="no" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="yes" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+				</Trigger>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
 					<name>
-						acal_upcoming_open
+						acal_reminder_gag
 					</name>
 					<script>
-						acal.upcoming = {}
 						deleteLine()
 					</script>
 					<triggerType>
@@ -316,7 +188,7 @@
 						0
 					</conditonLineDelta>
 					<mStayOpen>
-						999
+						0
 					</mStayOpen>
 					<mCommand>
 					</mCommand>
@@ -338,158 +210,250 @@
 					</colorTriggerBgColor>
 					<regexCodeList>
 						<string>
-							Upcoming events and happenings.
-						</string>
-						<string>
-							No upcoming events.
+							return not isPrompt()
 						</string>
 					</regexCodeList>
 					<regexCodePropertyList>
 						<integer>
-							3
-						</integer>
-						<integer>
-							3
+							4
 						</integer>
 					</regexCodePropertyList>
-					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="yes" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
-						<name>
-							acal_upcoming_capture
-						</name>
-						<script>
-							--id, event, days, hours, minutes
-							acal.addUpcomingEvent(matches[2],matches[3],matches[4],matches[5],matches[6])
-						</script>
-						<triggerType>
-							0
-						</triggerType>
-						<conditonLineDelta>
-							0
-						</conditonLineDelta>
-						<mStayOpen>
-							0
-						</mStayOpen>
-						<mCommand>
-						</mCommand>
-						<packageName>
-						</packageName>
-						<mFgColor>
-							#ff0000
-						</mFgColor>
-						<mBgColor>
-							#ffff00
-						</mBgColor>
-						<mSoundFile>
-						</mSoundFile>
-						<colorTriggerFgColor>
-							#000000
-						</colorTriggerFgColor>
-						<colorTriggerBgColor>
-							#000000
-						</colorTriggerBgColor>
-						<regexCodeList>
-							<string>
-								^(\d+)\s+(.{1,50})\s*(?:(\d+)d)?\s*(?:(\d+)h)?\s*(?:(\d+)m)?$
-							</string>
-						</regexCodeList>
-						<regexCodePropertyList>
-							<integer>
-								1
-							</integer>
-						</regexCodePropertyList>
-					</Trigger>
-					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
-						<name>
-							acal_upcoming_gag
-						</name>
-						<script>
-							deleteLine()
-						</script>
-						<triggerType>
-							0
-						</triggerType>
-						<conditonLineDelta>
-							0
-						</conditonLineDelta>
-						<mStayOpen>
-							0
-						</mStayOpen>
-						<mCommand>
-						</mCommand>
-						<packageName>
-						</packageName>
-						<mFgColor>
-							#ff0000
-						</mFgColor>
-						<mBgColor>
-							#ffff00
-						</mBgColor>
-						<mSoundFile>
-						</mSoundFile>
-						<colorTriggerFgColor>
-							#000000
-						</colorTriggerFgColor>
-						<colorTriggerBgColor>
-							#000000
-						</colorTriggerBgColor>
-						<regexCodeList>
-							<string>
-								return not isPrompt()
-							</string>
-						</regexCodeList>
-						<regexCodePropertyList>
-							<integer>
-								4
-							</integer>
-						</regexCodePropertyList>
-					</Trigger>
-					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="yes" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
-						<name>
-							acal_upcoming_close
-						</name>
-						<script>
-							setTriggerStayOpen('acal_upcoming_open',0)
-							disableTrigger('acal_upcoming_open')
-						</script>
-						<triggerType>
-							0
-						</triggerType>
-						<conditonLineDelta>
-							0
-						</conditonLineDelta>
-						<mStayOpen>
-							0
-						</mStayOpen>
-						<mCommand>
-						</mCommand>
-						<packageName>
-						</packageName>
-						<mFgColor>
-							#ff0000
-						</mFgColor>
-						<mBgColor>
-							#ffff00
-						</mBgColor>
-						<mSoundFile>
-						</mSoundFile>
-						<colorTriggerFgColor>
-							#000000
-						</colorTriggerFgColor>
-						<colorTriggerBgColor>
-							#000000
-						</colorTriggerBgColor>
-						<regexCodeList>
-							<string>
-								return isPrompt()
-							</string>
-						</regexCodeList>
-						<regexCodePropertyList>
-							<integer>
-								4
-							</integer>
-						</regexCodePropertyList>
-					</Trigger>
-				</TriggerGroup>
+				</Trigger>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>
+						acal_reminder_close
+					</name>
+					<script>
+						setTriggerStayOpen('acal_reminder_open',0)
+						disableTrigger('acal_reminder_open')
+					</script>
+					<triggerType>
+						0
+					</triggerType>
+					<conditonLineDelta>
+						0
+					</conditonLineDelta>
+					<mStayOpen>
+						0
+					</mStayOpen>
+					<mCommand>
+					</mCommand>
+					<packageName>
+					</packageName>
+					<mFgColor>
+						#ff0000
+					</mFgColor>
+					<mBgColor>
+						#ffff00
+					</mBgColor>
+					<mSoundFile>
+					</mSoundFile>
+					<colorTriggerFgColor>
+						#000000
+					</colorTriggerFgColor>
+					<colorTriggerBgColor>
+						#000000
+					</colorTriggerBgColor>
+					<regexCodeList>
+						<string>
+							return isPrompt()
+						</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>
+							4
+						</integer>
+					</regexCodePropertyList>
+				</Trigger>
+			</TriggerGroup>
+			<TriggerGroup isActive="no" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="yes" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+				<name>
+					acal_upcoming_open
+				</name>
+				<script>
+					acal.upcoming = {}
+					deleteLine()
+				</script>
+				<triggerType>
+					0
+				</triggerType>
+				<conditonLineDelta>
+					0
+				</conditonLineDelta>
+				<mStayOpen>
+					999
+				</mStayOpen>
+				<mCommand>
+				</mCommand>
+				<packageName>
+				</packageName>
+				<mFgColor>
+					#ff0000
+				</mFgColor>
+				<mBgColor>
+					#ffff00
+				</mBgColor>
+				<mSoundFile>
+				</mSoundFile>
+				<colorTriggerFgColor>
+					#000000
+				</colorTriggerFgColor>
+				<colorTriggerBgColor>
+					#000000
+				</colorTriggerBgColor>
+				<regexCodeList>
+					<string>
+						Upcoming events and happenings.
+					</string>
+					<string>
+						No upcoming events.
+					</string>
+				</regexCodeList>
+				<regexCodePropertyList>
+					<integer>
+						3
+					</integer>
+					<integer>
+						3
+					</integer>
+				</regexCodePropertyList>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="yes" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>
+						acal_upcoming_capture
+					</name>
+					<script>
+						--id, event, days, hours, minutes
+						acal.addUpcomingEvent(matches[2],matches[3],matches[4],matches[5],matches[6])
+					</script>
+					<triggerType>
+						0
+					</triggerType>
+					<conditonLineDelta>
+						0
+					</conditonLineDelta>
+					<mStayOpen>
+						0
+					</mStayOpen>
+					<mCommand>
+					</mCommand>
+					<packageName>
+					</packageName>
+					<mFgColor>
+						#ff0000
+					</mFgColor>
+					<mBgColor>
+						#ffff00
+					</mBgColor>
+					<mSoundFile>
+					</mSoundFile>
+					<colorTriggerFgColor>
+						#000000
+					</colorTriggerFgColor>
+					<colorTriggerBgColor>
+						#000000
+					</colorTriggerBgColor>
+					<regexCodeList>
+						<string>
+							^(\d+)\s+(.{1,50})\s*(?:(\d+)d)?\s*(?:(\d+)h)?\s*(?:(\d+)m)?$
+						</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>
+							1
+						</integer>
+					</regexCodePropertyList>
+				</Trigger>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>
+						acal_upcoming_gag
+					</name>
+					<script>
+						deleteLine()
+					</script>
+					<triggerType>
+						0
+					</triggerType>
+					<conditonLineDelta>
+						0
+					</conditonLineDelta>
+					<mStayOpen>
+						0
+					</mStayOpen>
+					<mCommand>
+					</mCommand>
+					<packageName>
+					</packageName>
+					<mFgColor>
+						#ff0000
+					</mFgColor>
+					<mBgColor>
+						#ffff00
+					</mBgColor>
+					<mSoundFile>
+					</mSoundFile>
+					<colorTriggerFgColor>
+						#000000
+					</colorTriggerFgColor>
+					<colorTriggerBgColor>
+						#000000
+					</colorTriggerBgColor>
+					<regexCodeList>
+						<string>
+							return not isPrompt()
+						</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>
+							4
+						</integer>
+					</regexCodePropertyList>
+				</Trigger>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="yes" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>
+						acal_upcoming_close
+					</name>
+					<script>
+						setTriggerStayOpen('acal_upcoming_open',0)
+						disableTrigger('acal_upcoming_open')
+					</script>
+					<triggerType>
+						0
+					</triggerType>
+					<conditonLineDelta>
+						0
+					</conditonLineDelta>
+					<mStayOpen>
+						0
+					</mStayOpen>
+					<mCommand>
+					</mCommand>
+					<packageName>
+					</packageName>
+					<mFgColor>
+						#ff0000
+					</mFgColor>
+					<mBgColor>
+						#ffff00
+					</mBgColor>
+					<mSoundFile>
+					</mSoundFile>
+					<colorTriggerFgColor>
+						#000000
+					</colorTriggerFgColor>
+					<colorTriggerBgColor>
+						#000000
+					</colorTriggerBgColor>
+					<regexCodeList>
+						<string>
+							return isPrompt()
+						</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>
+							4
+						</integer>
+					</regexCodePropertyList>
+				</Trigger>
 			</TriggerGroup>
 		</TriggerGroup>
 	</TriggerPackage>
@@ -508,66 +472,53 @@
 			</packageName>
 			<regex>
 			</regex>
-			<AliasGroup isActive="yes" isFolder="yes">
+			<Alias isActive="yes" isFolder="no">
 				<name>
-					Achaea Calendendar
+					acal_show_calendar
 				</name>
 				<script>
+					local offset = matches[2]
+					if not offset then offset = 0 end
+					acal.whipHampsters(offset)
 				</script>
 				<command>
 				</command>
 				<packageName>
 				</packageName>
 				<regex>
+					^(?i)acal(?: ([0-9]))?$
 				</regex>
-				<Alias isActive="yes" isFolder="no">
-					<name>
-						acal_show_calendar
-					</name>
-					<script>
-						local offset = matches[2]
-						if not offset then offset = 0 end
-						acal.whipHampsters(offset)
-					</script>
-					<command>
-					</command>
-					<packageName>
-					</packageName>
-					<regex>
-						^(?i)acal(?: ([0-9]))?$
-					</regex>
-				</Alias>
-				<Alias isActive="yes" isFolder="no">
-					<name>
-						acal_config_show
-					</name>
-					<script>
-						acal.showConfig()
-					</script>
-					<command>
-					</command>
-					<packageName>
-					</packageName>
-					<regex>
-						^(?i)acal config$
-					</regex>
-				</Alias>
-				<Alias isActive="yes" isFolder="no">
-					<name>
-						acal_config_set
-					</name>
-					<script>
-						acal.configUpdate(matches[2],matches[3],matches[4],matches[5],matches[6])
-					</script>
-					<command>
-					</command>
-					<packageName>
-					</packageName>
-					<regex>
-						^(?i)acal config (set(?:bg|fg)) (.+) (\d+) (\d+) (\d+)
-					</regex>
-				</Alias>
-			</AliasGroup>
+			</Alias>
+			<Alias isActive="yes" isFolder="no">
+				<name>
+					acal_config_show
+				</name>
+				<script>
+					acal.showConfig()
+				</script>
+				<command>
+				</command>
+				<packageName>
+				</packageName>
+				<regex>
+					^(?i)acal config$
+				</regex>
+			</Alias>
+			<Alias isActive="yes" isFolder="no">
+				<name>
+					acal_config_set
+				</name>
+				<script>
+					acal.configUpdate(matches[2],matches[3],matches[4],matches[5],matches[6])
+				</script>
+				<command>
+				</command>
+				<packageName>
+				</packageName>
+				<regex>
+					^(?i)acal config (set(?:bg|fg)) (.+) (\d+) (\d+) (\d+)
+				</regex>
+			</Alias>
 		</AliasGroup>
 	</AliasPackage>
 	<ActionPackage />
@@ -582,509 +533,494 @@
 			<script>
 			</script>
 			<eventHandlerList />
-			<ScriptGroup isActive="yes" isFolder="yes">
+			<Script isActive="yes" isFolder="no">
 				<name>
-					Achaea Calendar
+					acal_config
 				</name>
 				<packageName>
 				</packageName>
 				<script>
-					-------------------------------------------------
-					--         Put your Lua functions here.        --
-					--                                             --
-					-- Note that you can also use external scripts --
-					-------------------------------------------------
+					acal = acal or {}
+					
+					acal.config = acal.config or {}
+					
+					acal.config.bgcolors = {
+					{5,90,156},
+					{27,117,179},
+					{0,162,173},
+					{0,160,64},
+					{129,183,61},
+					{240,229,37},
+					{245,193,14},
+					{240,144,32},
+					{230,95,37},
+					{218,38,41},
+					{128,51,128},
+					{50,57,135}
+					}
+					acal.config.colors = {--acal.config.colors or {
+					current = {{0,255,0},{0,0,0}},
+					serenade = {{200,200,200},{0,0,0}},
+					reminder = {{255,255,0},{0,0,0}},
+					upcoming = {{255,0,0},{0,0,0}},
+					both = {{255,165,0},{0,0,0}}
+					}
+					
+					acal.config.months = {
+					{'Sarapin','HELP SARAPIS','Learn more about The Logos!'},
+					{'Daedalan','HELP DAEDALUS','Learn more about The Guardian of Balance!'},
+					{'Aeguary','HELP AEGIS','Learn more about The God of War!'},
+					{'Miraman','HELP MIRAMAR','Learn more about The Goddess of Justice!'},
+					{'Scarlatan','HELP SCARLATTI','Learn more about The Great Bard!'},
+					{'Ero','HELP EROS','Learn more about The God of Love!'},
+					{'Valnuary','HELP VALNURANA','Learn more about The Goddess of Sleep and Dreams!'},
+					{'Lupar','HELP LUPUS','Learn more about The Wild God of the Beasts!'},
+					{'Phaestian','HELP PHAESTUS', 'Learn more about The Smith!'},
+					{'Chronos','HELP AEON','Learn more about The Lord of Time!'},
+					{'Glacian','HELP GLACIUS','Not much is known about Glacius, unfortunantly!'},
+					{'Mayan','HELP MAYA','Learn more about The Great Mother!'}
+					}
+					
+					function acal.msg(msg)
+					cecho('\n&lt;orange&gt;[Achaean Calendar]&lt;reset&gt;: '..msg)
+					end
+					
+					function acal.saveConfig()
+					local filename = acal.getFilePath() .. 'config.lua'
+					table.save(filename, acal.config)
+					acal.msg('Configuration Saved!')
+					end --function
+					
+					function acal.loadConfig()
+					local filename = acal.getFilePath() .. 'config.lua'
+					if io.exists(filename) then table.load(filename, acal.config) end
+					acal.msg('Configuration Loaded!')
+					end --function
+					
+					function acal.showConfig()
+					acal.msg('Color Configuration - Click to change!')
+					
+					setBold(true) setUnderline(true)
+					echo('\n\nMONTH COLOR CONFIG           ')
+					resetFormat()
+					for k,v in pairs(acal.config.months) do
+					local bg = acal.config.bgcolors[k]
+					local fg = acal.getFg(bg[1],bg[2],bg[3])
+					local m = v[1]
+					
+					echo('\n  ')
+					setBgColor(bg[1],bg[2],bg[3])
+					setFgColor(fg[1],fg[2],fg[3])
+					
+					local s1 = math.floor((14-#m)/2)
+					local s2 = 14-#m-s1
+					echo(string.rep(' ',s1))
+					echo(m)
+					echo(string.rep(' ',s2))
+					resetFormat()
+					echo('  ')
+					local txt = 'setBG'
+					local cmd = [[acal.configInstructions("]]..m..[[",true)]]
+					local hnt = 'Change background color for '..m
+					setFgColor(82,219,255)
+					setUnderline(true)
+					echoLink(txt,cmd,hnt,true)
+					resetFormat()
+					end
+					
+					setBold(true) setUnderline(true)
+					echo('\n\nDATE COLOR CONFIG            ')
+					resetFormat()
+					for k,v in pairs(acal.config.colors) do
+					echo('\n')
+					echo(string.rep(" ",10-#k)..k)
+					echo(' ')
+					setBgColor(v[1][1],v[1][2],v[1][3])
+					setFgColor(v[2][1],v[2][2],v[2][3])
+					echo('25')
+					resetFormat()
+					echo('  ')
+					local txt = 'setBG'
+					local cmd = [[acal.configInstructions("]]..k:upper() ..[[",true)]]
+					local hnt = 'Change background color for '..k
+					setFgColor(82,219,255)
+					setUnderline(true)
+					echoLink(txt,cmd,hnt,true)
+					resetFormat()
+					echo('  ')
+					local txt = 'setFG'
+					local cmd = [[acal.configInstructions("]]..k:upper() ..[[",false)]]
+					local hnt = 'Change foreground color for '..k
+					setFgColor(82,119,255)
+					setUnderline(true)
+					echoLink(txt,cmd,hnt,true)
+					resetFormat()
+					end
+					
+					end
+					
+					function acal.configInstructions(c,t)
+					if t then t='BG' p='background' else t='FG' p='foreground' end
+					acal.msg('What should the '..p..' color be for '..c..'?')
+					echo('\nProvide R G B values, seperated by a space.')
+					clearCmdLine()
+					appendCmdLine('ACAL CONFIG SET'..t..' '..c:upper()..' ')
+					end
+					
+					function acal.configUpdate(t,s,r,g,b)
+					
+					for k,v in pairs(acal.config.months) do
+					if v[1]:upper() == s:upper() then
+					acal.config.bgcolors[k] = {r,g,b}
+					acal.showConfig()
+					do return end
+					end
+					end
+					
+					for k,v in pairs(acal.config.colors) do
+					if k:upper() == s:upper() then
+					if t == 'SETBG' then
+					acal.config.colors[k][1] = {r,g,b}
+					else
+					acal.config.colors[k][2] = {r,g,b}
+					end
+					acal.showConfig()
+					do return end
+					end
+					end
+					
+					acal.msg('That is not a valid configuartion setting!')
+					
+					end
 				</script>
 				<eventHandlerList />
-				<Script isActive="yes" isFolder="no">
-					<name>
-						acal_config
-					</name>
-					<packageName>
-					</packageName>
-					<script>
-						acal = acal or {}
-						
-						acal.config = acal.config or {}
-						
-						acal.config.bgcolors = {
-						{5,90,156},
-						{27,117,179},
-						{0,162,173},
-						{0,160,64},
-						{129,183,61},
-						{240,229,37},
-						{245,193,14},
-						{240,144,32},
-						{230,95,37},
-						{218,38,41},
-						{128,51,128},
-						{50,57,135}
-						}
-						acal.config.colors = {--acal.config.colors or {
-						current = {{0,255,0},{0,0,0}},
-						serenade = {{200,200,200},{0,0,0}},
-						reminder = {{255,255,0},{0,0,0}},
-						upcoming = {{255,0,0},{0,0,0}},
-						both = {{255,165,0},{0,0,0}}
-						}
-						
-						acal.config.months = {
-						{'Sarapin','HELP SARAPIS','Learn more about The Logos!'},
-						{'Daedalan','HELP DAEDALUS','Learn more about The Guardian of Balance!'},
-						{'Aeguary','HELP AEGIS','Learn more about The God of War!'},
-						{'Miraman','HELP MIRAMAR','Learn more about The Goddess of Justice!'},
-						{'Scarlatan','HELP SCARLATTI','Learn more about The Great Bard!'},
-						{'Ero','HELP EROS','Learn more about The God of Love!'},
-						{'Valnuary','HELP VALNURANA','Learn more about The Goddess of Sleep and Dreams!'},
-						{'Lupar','HELP LUPUS','Learn more about The Wild God of the Beasts!'},
-						{'Phaestian','HELP PHAESTUS', 'Learn more about The Smith!'},
-						{'Chronos','HELP AEON','Learn more about The Lord of Time!'},
-						{'Glacian','HELP GLACIUS','Not much is known about Glacius, unfortunantly!'},
-						{'Mayan','HELP MAYA','Learn more about The Great Mother!'}
-						}
-						
-						function acal.msg(msg)
-						cecho('\n&lt;orange&gt;[Achaean Calendar]&lt;reset&gt;: '..msg)
-						end
-						
-						function acal.saveConfig()
-						local filename = acal.getFilePath() .. 'config.lua'
-						table.save(filename, acal.config)
-						acal.msg('Configuration Saved!')
-						end --function
-						
-						function acal.loadConfig()
-						local filename = acal.getFilePath() .. 'config.lua'
-						if io.exists(filename) then table.load(filename, acal.config) end
-						acal.msg('Configuration Loaded!')
-						end --function
-						
-						function acal.showConfig()
-						acal.msg('Color Configuration - Click to change!')
-						
-						setBold(true) setUnderline(true)
-						echo('\n\nMONTH COLOR CONFIG           ')
-						resetFormat()
-						for k,v in pairs(acal.config.months) do
-						local bg = acal.config.bgcolors[k]
-						local fg = acal.getFg(bg[1],bg[2],bg[3])
-						local m = v[1]
-						
-						echo('\n  ')
-						setBgColor(bg[1],bg[2],bg[3])
-						setFgColor(fg[1],fg[2],fg[3])
-						
-						local s1 = math.floor((14-#m)/2)
-						local s2 = 14-#m-s1
-						echo(string.rep(' ',s1))
-						echo(m)
-						echo(string.rep(' ',s2))
-						resetFormat()
-						echo('  ')
-						local txt = 'setBG'
-						local cmd = [[acal.configInstructions("]]..m..[[",true)]]
-						local hnt = 'Change background color for '..m
-						setFgColor(82,219,255)
-						setUnderline(true)
-						echoLink(txt,cmd,hnt,true)
-						resetFormat()
-						end
-						
-						setBold(true) setUnderline(true)
-						echo('\n\nDATE COLOR CONFIG            ')
-						resetFormat()
-						for k,v in pairs(acal.config.colors) do
-						echo('\n')
-						echo(string.rep(" ",10-#k)..k)
-						echo(' ')
-						setBgColor(v[1][1],v[1][2],v[1][3])
-						setFgColor(v[2][1],v[2][2],v[2][3])
-						echo('25')
-						resetFormat()
-						echo('  ')
-						local txt = 'setBG'
-						local cmd = [[acal.configInstructions("]]..k:upper() ..[[",true)]]
-						local hnt = 'Change background color for '..k
-						setFgColor(82,219,255)
-						setUnderline(true)
-						echoLink(txt,cmd,hnt,true)
-						resetFormat()
-						echo('  ')
-						local txt = 'setFG'
-						local cmd = [[acal.configInstructions("]]..k:upper() ..[[",false)]]
-						local hnt = 'Change foreground color for '..k
-						setFgColor(82,119,255)
-						setUnderline(true)
-						echoLink(txt,cmd,hnt,true)
-						resetFormat()
-						end
-						
-						end
-						
-						function acal.configInstructions(c,t)
-						if t then t='BG' p='background' else t='FG' p='foreground' end
-						acal.msg('What should the '..p..' color be for '..c..'?')
-						echo('\nProvide R G B values, seperated by a space.')
-						clearCmdLine()
-						appendCmdLine('ACAL CONFIG SET'..t..' '..c:upper()..' ')
-						end
-						
-						function acal.configUpdate(t,s,r,g,b)
-						
-						for k,v in pairs(acal.config.months) do
-						if v[1]:upper() == s:upper() then
-						acal.config.bgcolors[k] = {r,g,b}
-						acal.showConfig()
-						do return end
-						end
-						end
-						
-						for k,v in pairs(acal.config.colors) do
-						if k:upper() == s:upper() then
-						if t == 'SETBG' then
-						acal.config.colors[k][1] = {r,g,b}
-						else
-						acal.config.colors[k][2] = {r,g,b}
-						end
-						acal.showConfig()
-						do return end
-						end
-						end
-						
-						acal.msg('That is not a valid configuartion setting!')
-						
-						end
-					</script>
-					<eventHandlerList />
-				</Script>
-				<Script isActive="yes" isFolder="no">
-					<name>
-						acal_main
-					</name>
-					<packageName>
-					</packageName>
-					<script>
-						--displays the calendar with a given year offset
-						function acal.displayCalendar(year_offset)
-						
-						local s --major sections
-						local x --columns
-						local y --minor sections
-						local z --rows
-						
-						local mname --month name
-						local mfg --month foreground
-						local mbg --month background
-						local sep = ' | '
-						
-						local year = acal.time.year + year_offset
-						local month --month getLineNumber
-						local day --day number
-						
-						for s=1,3,1 do --Sections
-						if s==1 then echo(' +--------------------- ACHAEAN CALENDAR '..year..' AF ---------------------+ ') end
-						echo('\n')
-						echo(sep)
-						for h=1,4 do --Headers
-						month = ((s-1)*4)+h
-						mname = acal.config.months[month][1]
-						mbg = acal.config.bgcolors[month]
-						mfg = acal.getFg(mbg[1],mbg[2],mbg[3])
-						
-						local s1 = math.floor((14-#mname)/2)
-						local s2 = 14-#mname-s1
-						local txt = mname
-						local cmd = [[send(']]..acal.config.months[month][2]..[[',false)]]
-						local hnt = acal.config.months[month][3]
-						
-						setFgColor(mfg[1],mfg[2],mfg[3])
-						setBgColor(mbg[1],mbg[2],mbg[3])
-						echo(string.rep(' ',s1))
-						echoLink(txt,cmd,hnt,true)
-						echo(string.rep(' ',s2))
-						resetFormat()
-						echo(sep)
-						
-						end --for Headers
-						
-						for x=1,5,1 do --Details X Rows
-						echo('\n')
-						for y=1,4,1 do --Details Y Sections
-						echo(sep)
-						month = ((s-1)*4)+y
-						mname = acal.config.months[month][1]
-						for z=1,5,1 do --Details Z Columns
-						day = ((x-1)*5)+z
-						
-						--check for sernade
-						local sstring = ''
-						if acal.checkSerenade(year, month, day) then
-						local bg = acal.config.colors['serenade'][1]
-						local fg = acal.config.colors['serenade'][2]
-						setBgColor(bg[1],bg[2],bg[3])
-						setFgColor(fg[1],fg[2],fg[3])
-						sstring = '\nOrphean Serenade'
-						end --if
-						
-						--check for upcoming
-						local ustring = acal.returnUpcoming(year, month, day)
-						if ustring ~= '' then
-						local bg = acal.config.colors['upcoming'][1]
-						local fg = acal.config.colors['upcoming'][2]
-						setBgColor(bg[1],bg[2],bg[3])
-						setFgColor(fg[1],fg[2],fg[3])
-						end --if
-						
-						--check for reminders
-						local rstring = acal.returnReminders(year, mname, day)
-						if rstring ~= '' then
-						setFgColor(0,0,0)
-						setBgColor(255,255,0)
-						end --if
-						
-						--color for both reminder and event
-						if rstring ~= '' and ustring ~= '' then
-						setFgColor(0,0,0)
-						setBgColor(255,140,0)
-						end --if
-						
-						--check for current day
-						if acal.checkCurrentDay(year, month, day) then
-						setFgColor(0,0,0)
-						setBgColor(57,255,20)
-						end --if
-						
-						local txt = string.format('%2s',day)
-						local cmd = [[send('date ]]..tostring(day)..[[ ]]..tostring(mname)..[[ ]]..tostring(year)..[[',false)]]
-						local hnt = acal.returnLocalTime(year,month,day)..sstring..ustring..rstring
-						echoLink(txt,cmd,hnt,true)
-						resetFormat()
-						if z~=5 then echo(' ') end
-						end --z
-						end --y
-						echo(sep)
-						end --for x
-						end --sections
-						echo('\n +-------------------------------------------------------------------+ ')
-						send(' ')
-						end--function
-						
-						function acal.whipHampsters(year_offset)
-						
-						if gmcp.Char.Name.name == 'Jinsun' then
-						acal.msg('BAHAHAHA! Pirates don\'t get fancy calendars!')
-						else
-						enableTrigger('acal_upcoming_open')
-						enableTrigger('acal_reminder_open')
-						sendGMCP("IRE.Time.Request")
-						send('upcoming',false)
-						send('reminder list',false)
-						tempTimer(.5,[[acal.displayCalendar(]]..year_offset..[[)]])
-						end
-						end
-						
-						function acal.checkSerenade(y, m, d)
-						local d1 = (acal.time.year - 1) * 300 + (acal.time.mon - 1) * 25 + acal.time.day
-						local d2 = (y - 1) * 300 + (m - 1) * 25 + d
-						local d = d2 - d1
-						local t = os.date("!*t",os.time()+(d*60*60))
-						return t.hour == 0
-						end --function
-						
-						
-						function acal.checkCurrentDay(y,m,d)
-						local cd = tonumber(acal.time.day)
-						local cm = tonumber(acal.time.mon)
-						local cy = tonumber(acal.time.year)
-						
-						if y == cy and m == cm and d == cd then
-						return true
-						else
-						return false
-						end
-						
-						end --function
-						
-						--function to determine proper foreground colour
-						function acal.getFg(r,g,b)
-						if (r*0.299 + g*0.587 + b*0.114) &gt; 150 then
-						return {0,0,0}
-						else
-						return {255,255,255}
-						end
-						end
-						
-						--append events
-						function acal.addUpcomingEvent(id,event,days,hours,minutes)
-						if days == '' then days = 0 else days = tonumber(days) end
-						if hours == '' then hours = 0 else hours = tonumber(hours) end
-						if minutes == '' then minutes = 0 else minutes = tonumber(minutes) end
-						local t = (days * 24) + hours
-						if minutes &gt; 30 then t = t + 1 end
-						acal.upcoming[id] = {event:trim(),t}
-						end
-						
-						--return events for specific day
-						function acal.returnUpcoming(y, m, d)
-						local d1 = (acal.time.year - 1) * 300 + (acal.time.mon - 1) * 25 + acal.time.day
-						local d2 = (y - 1) * 300 + (m - 1) * 25 + d
-						local d = d2 - d1
-						local s = ''
-						for _, e in pairs(acal.upcoming) do
-						if e[2] == d then
-						s = s..'\n(U) '..e[1]
-						end
-						end --for
-						return s
-						end
-						
-						--adds a reminder to the list
-						function acal.addReminder(id,reminder,year,month,day)
-						day = tonumber(day)
-						year = tonumber(year)
-						acal.reminders[id] = {reminder:trim(),year,month,day}
-						end --function
-						
-						--return reminders for day
-						function acal.returnReminders(y,m,d)
-						local s = ''
-						for _, r in pairs(acal.reminders) do
-						if r[2] == y and r[3] == m and r[4] == d then
-						s = s..'\n(R) '..r[1]
-						end
-						end --for
-						return s
-						end --function
-						
-						--return local time
-						function acal.returnLocalTime(y,m,d)
-						local d1 = (acal.time.year - 1) * 300 + (acal.time.mon - 1) * 25 + acal.time.day
-						local d2 = (y - 1) * 300 + (m - 1) * 25 + d
-						local d = d2 - d1
-						local t = os.date("%B %d (%I%p)",os.time()+(d*60*60))
-						return t
-						end --function
-					</script>
-					<eventHandlerList />
-				</Script>
-				<Script isActive="yes" isFolder="no">
-					<name>
-						acal_time_capture
-					</name>
-					<packageName>
-					</packageName>
-					<script>
-						--sets time as it recieves it via gmcp
-						function acal.setTime()
-						acal.time = gmcp.IRE.Time.List
-						end
-						
-						--updates time as it recieves it via gmcp
-						function acal.updateTime()
-						if acal.time then
-						for k,v in pairs(gmcp.IRE.Time.Update) do
-						acal.time[k] = v
-						end
-						end
-						end
-						
-						--adds support for gmcp time
-						function acal.registerTime()
-						if not acal.time then
-						sendGMCP('Core.Supports.Add ["IRE.Time 1"]')
-						end
-						end
-						
-						registerAnonymousEventHandler("sysConnectionEvent","acal.registerTime")
-						registerAnonymousEventHandler("gmcp.IRE.Time", "acal.setTime")
-						registerAnonymousEventHandler("gmcp.IRE.Time.Update", "acal.updateTime")
-						acal.registerTime()
-					</script>
-					<eventHandlerList />
-				</Script>
-				<Script isActive="yes" isFolder="no">
-					<name>
-						acal_downloads
-					</name>
-					<packageName>
-					</packageName>
-					<script>
-						function acal.downloadedFile(_,filename)
-						acal.updating = true
-						if filename:find("version") then acal.checkVersion(filename) end
-						if filename:find("achaea%-calendar") then acal.installPackage(filename) end
-						acal.updating = false
-						end
-						
-						registerAnonymousEventHandler("sysDownloadDone", "acal.downloadedFile")
-						
-						function acal.getFilePath()
-						local t,s = lfs.mkdir(getMudletHomeDir().."/achaea_calendar/")
-						if not t and s ~= "File exists" then acal.msg("Couldn't make the '"..downloadfolder.."' folder; "..s) return end
-						return getMudletHomeDir().."/achaea_calendar/"
-						end --function
-						
-						function acal.downloadVersion()
-						if acal.updating then return end
-						local path = acal.getFilePath()..'version.txt'
-						local url = 'https://thaisenachaeascripts.github.io/Achaea-Calendar/version.txt'
-						downloadFile(path, url)
-						end
-						
-						function acal.checkVersion(filename)
-						local f, s = io.open(filename)
-						if f then s = f:read("*l"):trim(); io.close(f) end
-						if s ~= acal.config.version then
-						acal.msg('')
-						cechoLink("The script was updated! Click here to get it now!", [[acal.downloadScript()]], "Install Script!", true)
-						end
-						end
-						
-						function acal.downloadScript()
-						if acal.updating then return end
-						local path = acal.getFilePath()..'achaea-calendar.xml'
-						local url = 'https://thaisenachaeascripts.github.io/Achaea-Calendar/achaea-calendar.xml'
-						downloadFile(path, url)
-						acal.msg('Downloading new script!')
-						end
-						
-						function acal.installPackage(filename)
-						
-						acal.msg('New script installed!')
-						end
-					</script>
-					<eventHandlerList />
-				</Script>
-				<Script isActive="yes" isFolder="no">
-					<name>
-						acal_intialize
-					</name>
-					<packageName>
-					</packageName>
-					<script>
-						--runs once, when script is installed
-						function acal.installed(_, p)
-						local v = '1.0'
-						
-						if p == 'achaea-calendar' then
-						local filename = acal.getFilePath() .. 'config.lua'
-						if io.exists(filename) then
-						acal.loadConfig()
-						else
-						acal.saveConfig()
-						end
-						acal.config.version = v
-						
-						acal.msg('Calendar installation complete. ACAL to check it out!')
-						end
-						end --function
-						
-						registerAnonymousEventHandler("sysInstallPackage","acal.installed")
-					</script>
-					<eventHandlerList />
-				</Script>
-			</ScriptGroup>
+			</Script>
+			<Script isActive="yes" isFolder="no">
+				<name>
+					acal_main
+				</name>
+				<packageName>
+				</packageName>
+				<script>
+					--displays the calendar with a given year offset
+					function acal.displayCalendar(year_offset)
+					
+					local s --major sections
+					local x --columns
+					local y --minor sections
+					local z --rows
+					
+					local mname --month name
+					local mfg --month foreground
+					local mbg --month background
+					local sep = ' | '
+					
+					local year = acal.time.year + year_offset
+					local month --month getLineNumber
+					local day --day number
+					
+					for s=1,3,1 do --Sections
+					if s==1 then echo(' +--------------------- ACHAEAN CALENDAR '..year..' AF ---------------------+ ') end
+					echo('\n')
+					echo(sep)
+					for h=1,4 do --Headers
+					month = ((s-1)*4)+h
+					mname = acal.config.months[month][1]
+					mbg = acal.config.bgcolors[month]
+					mfg = acal.getFg(mbg[1],mbg[2],mbg[3])
+					
+					local s1 = math.floor((14-#mname)/2)
+					local s2 = 14-#mname-s1
+					local txt = mname
+					local cmd = [[send(']]..acal.config.months[month][2]..[[',false)]]
+					local hnt = acal.config.months[month][3]
+					
+					setFgColor(mfg[1],mfg[2],mfg[3])
+					setBgColor(mbg[1],mbg[2],mbg[3])
+					echo(string.rep(' ',s1))
+					echoLink(txt,cmd,hnt,true)
+					echo(string.rep(' ',s2))
+					resetFormat()
+					echo(sep)
+					
+					end --for Headers
+					
+					for x=1,5,1 do --Details X Rows
+					echo('\n')
+					for y=1,4,1 do --Details Y Sections
+					echo(sep)
+					month = ((s-1)*4)+y
+					mname = acal.config.months[month][1]
+					for z=1,5,1 do --Details Z Columns
+					day = ((x-1)*5)+z
+					
+					--check for sernade
+					local sstring = ''
+					if acal.checkSerenade(year, month, day) then
+					local bg = acal.config.colors['serenade'][1]
+					local fg = acal.config.colors['serenade'][2]
+					setBgColor(bg[1],bg[2],bg[3])
+					setFgColor(fg[1],fg[2],fg[3])
+					sstring = '\nOrphean Serenade'
+					end --if
+					
+					--check for upcoming
+					local ustring = acal.returnUpcoming(year, month, day)
+					if ustring ~= '' then
+					local bg = acal.config.colors['upcoming'][1]
+					local fg = acal.config.colors['upcoming'][2]
+					setBgColor(bg[1],bg[2],bg[3])
+					setFgColor(fg[1],fg[2],fg[3])
+					end --if
+					
+					--check for reminders
+					local rstring = acal.returnReminders(year, mname, day)
+					if rstring ~= '' then
+					setFgColor(0,0,0)
+					setBgColor(255,255,0)
+					end --if
+					
+					--color for both reminder and event
+					if rstring ~= '' and ustring ~= '' then
+					setFgColor(0,0,0)
+					setBgColor(255,140,0)
+					end --if
+					
+					--check for current day
+					if acal.checkCurrentDay(year, month, day) then
+					setFgColor(0,0,0)
+					setBgColor(57,255,20)
+					end --if
+					
+					local txt = string.format('%2s',day)
+					local cmd = [[send('date ]]..tostring(day)..[[ ]]..tostring(mname)..[[ ]]..tostring(year)..[[',false)]]
+					local hnt = acal.returnLocalTime(year,month,day)..sstring..ustring..rstring
+					echoLink(txt,cmd,hnt,true)
+					resetFormat()
+					if z~=5 then echo(' ') end
+					end --z
+					end --y
+					echo(sep)
+					end --for x
+					end --sections
+					echo('\n +-------------------------------------------------------------------+ ')
+					send(' ')
+					end--function
+					
+					function acal.whipHampsters(year_offset)
+					
+					if gmcp.Char.Name.name == 'Jinsun' then
+					acal.msg('BAHAHAHA! Pirates don\'t get fancy calendars!')
+					else
+					enableTrigger('acal_upcoming_open')
+					enableTrigger('acal_reminder_open')
+					sendGMCP("IRE.Time.Request")
+					send('upcoming',false)
+					send('reminder list',false)
+					tempTimer(.5,[[acal.displayCalendar(]]..year_offset..[[)]])
+					end
+					end
+					
+					function acal.checkSerenade(y, m, d)
+					local d1 = (acal.time.year - 1) * 300 + (acal.time.mon - 1) * 25 + acal.time.day
+					local d2 = (y - 1) * 300 + (m - 1) * 25 + d
+					local d = d2 - d1
+					local t = os.date("!*t",os.time()+(d*60*60))
+					return t.hour == 0
+					end --function
+					
+					
+					function acal.checkCurrentDay(y,m,d)
+					local cd = tonumber(acal.time.day)
+					local cm = tonumber(acal.time.mon)
+					local cy = tonumber(acal.time.year)
+					
+					if y == cy and m == cm and d == cd then
+					return true
+					else
+					return false
+					end
+					
+					end --function
+					
+					--function to determine proper foreground colour
+					function acal.getFg(r,g,b)
+					if (r*0.299 + g*0.587 + b*0.114) &gt; 150 then
+					return {0,0,0}
+					else
+					return {255,255,255}
+					end
+					end
+					
+					--append events
+					function acal.addUpcomingEvent(id,event,days,hours,minutes)
+					if days == '' then days = 0 else days = tonumber(days) end
+					if hours == '' then hours = 0 else hours = tonumber(hours) end
+					if minutes == '' then minutes = 0 else minutes = tonumber(minutes) end
+					local t = (days * 24) + hours
+					if minutes &gt; 30 then t = t + 1 end
+					acal.upcoming[id] = {event:trim(),t}
+					end
+					
+					--return events for specific day
+					function acal.returnUpcoming(y, m, d)
+					local d1 = (acal.time.year - 1) * 300 + (acal.time.mon - 1) * 25 + acal.time.day
+					local d2 = (y - 1) * 300 + (m - 1) * 25 + d
+					local d = d2 - d1
+					local s = ''
+					for _, e in pairs(acal.upcoming) do
+					if e[2] == d then
+					s = s..'\n(U) '..e[1]
+					end
+					end --for
+					return s
+					end
+					
+					--adds a reminder to the list
+					function acal.addReminder(id,reminder,year,month,day)
+					day = tonumber(day)
+					year = tonumber(year)
+					acal.reminders[id] = {reminder:trim(),year,month,day}
+					end --function
+					
+					--return reminders for day
+					function acal.returnReminders(y,m,d)
+					local s = ''
+					for _, r in pairs(acal.reminders) do
+					if r[2] == y and r[3] == m and r[4] == d then
+					s = s..'\n(R) '..r[1]
+					end
+					end --for
+					return s
+					end --function
+					
+					--return local time
+					function acal.returnLocalTime(y,m,d)
+					local d1 = (acal.time.year - 1) * 300 + (acal.time.mon - 1) * 25 + acal.time.day
+					local d2 = (y - 1) * 300 + (m - 1) * 25 + d
+					local d = d2 - d1
+					local t = os.date("%B %d (%I%p)",os.time()+(d*60*60))
+					return t
+					end --function
+				</script>
+				<eventHandlerList />
+			</Script>
+			<Script isActive="yes" isFolder="no">
+				<name>
+					acal_time_capture
+				</name>
+				<packageName>
+				</packageName>
+				<script>
+					--sets time as it recieves it via gmcp
+					function acal.setTime()
+					acal.time = gmcp.IRE.Time.List
+					end
+					
+					--updates time as it recieves it via gmcp
+					function acal.updateTime()
+					if acal.time then
+					for k,v in pairs(gmcp.IRE.Time.Update) do
+					acal.time[k] = v
+					end
+					end
+					end
+					
+					--adds support for gmcp time
+					function acal.registerTime()
+					if not acal.time then
+					sendGMCP('Core.Supports.Add ["IRE.Time 1"]')
+					end
+					end
+					
+					registerAnonymousEventHandler("sysConnectionEvent","acal.registerTime")
+					registerAnonymousEventHandler("gmcp.IRE.Time", "acal.setTime")
+					registerAnonymousEventHandler("gmcp.IRE.Time.Update", "acal.updateTime")
+					acal.registerTime()
+				</script>
+				<eventHandlerList />
+			</Script>
+			<Script isActive="yes" isFolder="no">
+				<name>
+					acal_downloads
+				</name>
+				<packageName>
+				</packageName>
+				<script>
+					function acal.downloadedFile(_,filename)
+					acal.updating = true
+					if filename:find("version") then acal.checkVersion(filename) end
+					if filename:find("achaea%-calendar") then acal.installPackage(filename) end
+					acal.updating = false
+					end
+					
+					registerAnonymousEventHandler("sysDownloadDone", "acal.downloadedFile")
+					
+					function acal.getFilePath()
+					local t,s = lfs.mkdir(getMudletHomeDir().."/achaea_calendar/")
+					if not t and s ~= "File exists" then acal.msg("Couldn't make the '"..downloadfolder.."' folder; "..s) return end
+					return getMudletHomeDir().."/achaea_calendar/"
+					end --function
+					
+					function acal.downloadVersion()
+					if acal.updating then return end
+					local path = acal.getFilePath()..'version.txt'
+					local url = 'https://thaisenachaeascripts.github.io/Achaea-Calendar/version.txt'
+					downloadFile(path, url)
+					end
+					
+					function acal.checkVersion(filename)
+					local f, s = io.open(filename)
+					if f then s = f:read("*l"):trim(); io.close(f) end
+					if s ~= acal.config.version then
+					acal.msg('')
+					cechoLink("The script was updated! Click here to get it now!", [[acal.downloadScript()]], "Install Script!", true)
+					end
+					end
+					
+					function acal.downloadScript()
+					if acal.updating then return end
+					local path = acal.getFilePath()..'achaea-calendar.xml'
+					local url = 'https://thaisenachaeascripts.github.io/Achaea-Calendar/achaea-calendar.xml'
+					downloadFile(path, url)
+					acal.msg('Downloading new script!')
+					end
+					
+					function acal.installPackage(filename)
+					
+					acal.msg('New script installed!')
+					end
+				</script>
+				<eventHandlerList />
+			</Script>
+			<Script isActive="yes" isFolder="no">
+				<name>
+					acal_intialize
+				</name>
+				<packageName>
+				</packageName>
+				<script>
+					--runs once, when script is installed
+					function acal.installed(_, p)
+					local v = '1.0'
+					
+					if p == 'achaea-calendar' then
+					local filename = acal.getFilePath() .. 'config.lua'
+					if io.exists(filename) then
+					acal.loadConfig()
+					else
+					acal.saveConfig()
+					end
+					acal.config.version = v
+					
+					acal.msg('Calendar installation complete. ACAL to check it out!')
+					end
+					end --function
+					
+					registerAnonymousEventHandler("sysInstallPackage","acal.installed")
+				</script>
+				<eventHandlerList />
+			</Script>
 		</ScriptGroup>
 	</ScriptPackage>
 	<KeyPackage />
