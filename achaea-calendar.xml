@@ -19,7 +19,8 @@
 			<regexCodePropertyList />
 			<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
 				<name>acal_login</name>
-				<script>acal.registerTime()</script>
+				<script>acal.time = nil
+acal.registerTime()</script>
 				<triggerType>0</triggerType>
 				<conditonLineDelta>0</conditonLineDelta>
 				<mStayOpen>0</mStayOpen>
@@ -207,7 +208,22 @@ disableTrigger('acal_upcoming_open')</script>
 			</TriggerGroup>
 		</TriggerGroup>
 	</TriggerPackage>
-	<TimerPackage />
+	<TimerPackage>
+		<TimerGroup isActive="yes" isFolder="yes" isTempTimer="no" isOffsetTimer="no">
+			<name>achaea-calendar</name>
+			<script></script>
+			<command></command>
+			<packageName></packageName>
+			<time>00:00:00.000</time>
+			<Timer isActive="yes" isFolder="no" isTempTimer="no" isOffsetTimer="no">
+				<name>acal_check_for_update</name>
+				<script>acal.downloadVersion()</script>
+				<command></command>
+				<packageName></packageName>
+				<time>01:15:00.000</time>
+			</Timer>
+		</TimerGroup>
+	</TimerPackage>
 	<AliasPackage>
 		<AliasGroup isActive="yes" isFolder="yes">
 			<name>achaea-calendar</name>
@@ -268,6 +284,7 @@ acal.config.bgcolors = {
   {128,51,128},
   {50,57,135}
 }
+
 acal.config.colors = {--acal.config.colors or {
   current = {{0,255,0},{0,0,0}},
   serenade = {{200,200,200},{0,0,0}},
@@ -682,8 +699,11 @@ function acal.downloadScript()
 end
 
 function acal.installPackage(filename)
-
-  acal.msg('New script installed!')
+  if not f:find("achaea-calendar",1,true) then return end 
+  uninstallPackage('achaea-calendar')
+  installPackage(filename)
+  os.remove(filename)
+  acal.msg('Script installed!')
 end</script>
 				<eventHandlerList />
 			</Script>
