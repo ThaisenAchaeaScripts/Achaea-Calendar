@@ -713,7 +713,7 @@ end</script>
 				<packageName></packageName>
 				<script>--runs once, when script is installed
 function acal.installed(_, p)
-  local v = '3.0'
+  local v = '4.0'
   
   if p == 'achaea-calendar' then
     local filename = acal.getFilePath() .. 'config.lua'
