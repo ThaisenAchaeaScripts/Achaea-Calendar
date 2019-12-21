@@ -699,7 +699,7 @@ function acal.downloadScript()
 end
 
 function acal.installPackage(filename)
-  if not f:find("achaea-calendar",1,true) then return end 
+  if not filename:find("achaea-calendar",1,true) then return end 
   uninstallPackage('achaea-calendar')
   installPackage(filename)
   os.remove(filename)
