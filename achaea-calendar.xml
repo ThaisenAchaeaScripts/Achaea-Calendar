@@ -270,8 +270,8 @@ acal.whipHampsters(offset)</script>
 
 acal.config = acal.config or {}
 
-acal.config.bgcolors = {
- 	{5,90,156},
+acal.config.bgcolors = acal.config.bgcolors or {
+  {5,90,156},
   {27,117,179},
   {0,162,173},
   {0,160,64},
@@ -285,7 +285,7 @@ acal.config.bgcolors = {
   {50,57,135}
 }
 
-acal.config.colors = {--acal.config.colors or {
+acal.config.colors = acal.config.colors or {
   current = {{0,255,0},{0,0,0}},
   serenade = {{200,200,200},{0,0,0}},
   reminder = {{255,255,0},{0,0,0}},
@@ -716,7 +716,7 @@ end</script>
 				<packageName></packageName>
 				<script>--runs once, when script is installed
 function acal.installed(_, p)
-  local v = '1.0'
+  local v = '2.0'
   
   if p == 'achaea-calendar' then
     local filename = acal.getFilePath() .. 'config.lua'
