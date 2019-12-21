@@ -702,12 +702,9 @@ function acal.installPackage(filename)
   local path = acal.getFilePath()..'achaea-calendar.xml'
   if path ~= filename then return end
   uninstallPackage('achaea-calendar')
-  tempTimer(1, function()
-    installPackage(filename)
-    os.remove(filename)
-    acal.msg('Update Complete!')
-    end
-   )
+  installPackage(filename)
+  os.remove(filename)
+  acal.msg('Update Complete!')
 end</script>
 				<eventHandlerList />
 			</Script>
