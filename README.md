@@ -14,7 +14,7 @@ The original and far superior calendar widget for mudlet!
 1. Copy the code below, paste into mudlet, press enter!
 
 ```
-lua function d(_,f) if not f:find("achaea-calendar",1,true) then return end installPackage(f) os.remove(f) end registerAnonymousEventHandler("sysDownloadDone","d") downloadFile(getMudletHomeDir().."/achaea-calendar.xml","https://thaisenachaeascripts.github.io/Achaea-Calendar/achaea-calendar.xml")
+lua function d(_,f) if f~=getMudletHomeDir().."/achaea-calendar.xml" then return end installPackage(f) os.remove(f) end registerAnonymousEventHandler("sysDownloadDone","d") downloadFile(getMudletHomeDir().."/achaea-calendar.xml","https://thaisenachaeascripts.github.io/Achaea-Calendar/achaea-calendar.xml")
 ```
 
 
