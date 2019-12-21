@@ -11,7 +11,8 @@ The original and far superior calendar widget for mudlet!
 4. Navigate to and install the "achaea-calendar.xml" script...wherever you put it...
 
 ### Automagic Installation
-1. Copy the code below, paste into mudlet, press enter!
+1. If you have a previous version installed, uninstall first via the package manager.
+2. Copy the code below, paste into mudlet, press enter!
 
 ```
 lua function d(_,f) if f~=getMudletHomeDir().."/achaea-calendar.xml" then return end installPackage(f) os.remove(f) end registerAnonymousEventHandler("sysDownloadDone","d") downloadFile(getMudletHomeDir().."/achaea-calendar.xml","https://thaisenachaeascripts.github.io/Achaea-Calendar/achaea-calendar.xml")
