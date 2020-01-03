@@ -324,8 +324,8 @@ function acal.loadConfig()
   acal.msg('Configuration Loaded!')
 end --function
 
-registerAnonymousEventHandler("sysLoadEvent","acal.saveConfig")
-registerAnonymousEventHandler("sysExitEvent","acal.loadConfig")
+registerAnonymousEventHandler("sysLoadEvent","acal.loadConfig")
+registerAnonymousEventHandler("sysExitEvent","acal.saveConfig")
 
 function acal.showConfig()
   acal.msg('Color Configuration - Click to change!')
@@ -716,7 +716,7 @@ end</script>
 				<packageName></packageName>
 				<script>--runs once, when script is installed
 function acal.installed(_, p)
-  local v = '5.0'
+  local v = '5.1'
   
   if p == 'achaea-calendar' then
     local filename = acal.getFilePath() .. 'config.lua'
