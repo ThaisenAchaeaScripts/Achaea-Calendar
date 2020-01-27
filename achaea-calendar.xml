@@ -664,7 +664,7 @@ acal.registerTime()</script>
 				<packageName></packageName>
 				<script>function acal.downloadedFile(_,filename)
   acal.updating = true
-  if filename:find("version") then acal.checkVersion(filename) end
+  if filename:find("acal_version") then acal.checkVersion(filename) end
   if filename:find("achaea%-calendar") then acal.installPackage(filename) end
   acal.updating = false
 end
@@ -679,7 +679,7 @@ end --function
 
 function acal.downloadVersion()
   if acal.updating then return end
-  local path = acal.getFilePath()..'version.txt'
+  local path = acal.getFilePath()..'acal_version.txt'
   local url = 'https://thaisenachaeascripts.github.io/Achaea-Calendar/version.txt'
   downloadFile(path, url)
 end
@@ -716,7 +716,7 @@ end</script>
 				<packageName></packageName>
 				<script>--runs once, when script is installed
 function acal.installed(_, p)
-  local v = '5.1'
+  local v = '5.5'
   
   if p == 'achaea-calendar' then
     local filename = acal.getFilePath() .. 'config.lua'
